@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { ReactComponent as ArrowIcon } from "../../static/images/downarrow.svg";
 import { ReactComponent as TrashIcon } from "../../static/images/trash.svg";
 import { AnimatePresence } from "framer-motion";
@@ -13,15 +13,20 @@ import {
 } from "./FormStyles";
 import { menuItems } from "./formData";
 import { menuItemVariants } from "./FormAnimations";
+import detectOutsideClick from "../../hooks/detectOutsideClick";
 
 const Dropdown = ({
   darkMode,
-  setOpen,
-  open,
   setCountryFilter,
   setVisible,
   countryFilter,
 }) => {
+  const menuRef = useRef();
+  const [open, setOpen] = useState(false);
+  const clickedOutside = detectOutsideClick(menuRef, open);
+  useEffect(() => {
+    if (clickedOutside) setOpen(false);
+  }, [clickedOutside, setOpen]);
   const renderMenuItems = () => {
     return menuItems.map((menuItem) => {
       return (
@@ -38,7 +43,7 @@ const Dropdown = ({
   };
 
   const onMenuClick = () => {
-    setOpen(!open);
+    setOpen(true);
   };
 
   const onClearClick = (e) => {
@@ -78,6 +83,7 @@ const Dropdown = ({
           <Menu
             className="dropdown__list"
             opened={open}
+            ref={menuRef}
             $darkmode={darkMode}
             variants={menuVariants}
             initial="initial"
@@ -93,3 +99,4 @@ const Dropdown = ({
 };
 
 export default Dropdown;
+// git commit -m "V2 of application. API updated. Complete Redux Store Redesign. Huge performance improvement with Redux Toolkit. Folder structures and Code Allocation redesigned"

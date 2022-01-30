@@ -2,6 +2,9 @@ import { useContext } from "react";
 import { useGetCountriesQuery } from "../apis/countryApi";
 import { AppContext } from "../Context/AppContext";
 
+/**
+ * Returns all filtered countries from api response .
+ */
 const GetAllFilteredCountries = () => {
   const { countryFilter, countrySearchQuery } = useContext(AppContext);
   const { countries, ...props } = useGetCountriesQuery(undefined, {
