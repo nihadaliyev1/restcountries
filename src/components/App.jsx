@@ -1,20 +1,18 @@
-import React from "react";
-import Header from "./Header";
-import Svgs from "./Svgs";
-import CountriesSection from "./CountriesComponents/CountriesSection";
+import React, { useContext } from "react";
+import Header from "./Header/Header";
+import CountriesSection from "./Countries/CountriesSection";
+import CountryDetails from "./Countries/CountryDetails/CountryDetails";
 import GlobalStyles from "../styles/GlobalStyles";
-import { connect } from "react-redux";
 import { Route, Switch, useLocation } from "react-router-dom";
-import CountryDetails from "./CountriesComponents/CountryDetails";
 import { AnimatePresence } from "framer-motion";
-
-const App = ({ darkMode }) => {
+import { AppContext } from "../Context/AppContext";
+const App = () => {
   const location = useLocation();
+  const { darkMode } = useContext(AppContext);
+
   return (
     <React.Fragment>
       <GlobalStyles $darkmode={darkMode} />
-      <Svgs />
-
       <Header />
       <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.key}>
@@ -26,10 +24,4 @@ const App = ({ darkMode }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    darkMode: state.darkMode,
-  };
-};
-
-export default connect(mapStateToProps)(App);
+export default App;

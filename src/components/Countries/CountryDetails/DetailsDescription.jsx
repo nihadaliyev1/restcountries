@@ -1,40 +1,11 @@
 import React from "react";
-import styled from "styled-components";
-
-const DescriptionWrapper = styled.div`
-  display: flex;
-  line-height: 3.2rem;
-`;
-
-const DescriptionList = styled.dl`
-  @media only screen and (max-width: 450px) {
-    &:not(:last-child) {
-      margin-bottom: 3.2rem;
-    }
-  }
-`;
-
-const DetailsCol2Middle = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding-top: 2.3rem;
-  @media only screen and (max-width: 450px) {
-    flex-direction: column;
-  }
-`;
-
-const DescriptionTermin = styled.dt`
-  font-weight: 600;
-  font-size: 1.6rem;
-  margin-right: 1rem;
-  @media only screen and (max-width: 1040px) {
-    font-size: 1.4rem;
-  }
-`;
-
-const Description = styled.dd`
-  font-size: 1.6rem;
-`;
+import {
+  DetailsCol2Middle,
+  DescriptionWrapper,
+  Description,
+  DescriptionTermin,
+  DescriptionList,
+} from "./CountryDetailsStyles";
 
 const DetailsDescription = ({ selectedCountry }) => {
   return (

@@ -22,6 +22,7 @@ const GlobalStyles = createGlobalStyle`
         font-family:${({ theme }) => theme.fonts.nunito};
         font-weight:400;
         transition:.4s background-color;
+        overflow-x:hidden;
     }
 
    

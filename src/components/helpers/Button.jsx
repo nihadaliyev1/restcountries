@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
-import { connect } from "react-redux";
+import { AppContext } from "../../Context/AppContext";
 
 const Butonn = styled.a`
   border: none;
@@ -62,7 +62,8 @@ const Butonn = styled.a`
   }
 `;
 
-const Button = ({ children, onClick, darkMode, className }) => {
+const Button = ({ children, onClick, className }) => {
+  const { darkMode } = useContext(AppContext);
   return (
     <Butonn onClick={onClick} className={className} $darkmode={darkMode}>
       {children}
@@ -70,10 +71,4 @@ const Button = ({ children, onClick, darkMode, className }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    darkMode: state.darkMode,
-  };
-};
-
-export default connect(mapStateToProps)(Button);
+export default Button;

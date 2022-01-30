@@ -1,24 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware, compose } from "redux";
 import { ThemeProvider } from "styled-components";
-import thunk from "redux-thunk";
 import App from "./components/App";
-import reducers from "./reducers";
 import { BrowserRouter as Router } from "react-router-dom";
-
+import { configureStore } from "@reduxjs/toolkit";
 import theme from "./styles/Theme";
+import { countryApi } from "./apis/countryApi";
+import AppContextProvider from "./Context/AppContext";
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = configureStore({
+  reducer: {
+    [countryApi.reducerPath]: countryApi.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(countryApi.middleware),
+});
 
 ReactDOM.render(
-  <Provider
-    store={createStore(reducers, composeEnhancers(applyMiddleware(thunk)))}
-  >
+  <Provider store={store}>
     <ThemeProvider theme={theme}>
       <Router>
-        <App />
+        <AppContextProvider>
+          <App />
+        </AppContextProvider>
       </Router>
     </ThemeProvider>
   </Provider>,
